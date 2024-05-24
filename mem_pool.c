@@ -17,12 +17,12 @@ memPool *create_mem_pool(size_t block_size, size_t block_count)
 
     memPool *pool = (memPool*)malloc(sizeof(memPool));
     if (!pool) {
-        logError("[%s,%d]error, malloc failed\n", __func__, __LINE__);
+        printf("[%s,%d]error, malloc failed\n", __func__, __LINE__);
         return NULL;
     }
     pool->pool = malloc(block_count * block_size);
     if (!pool->pool) {
-        logError("[%s,%d]error, malloc failed\n", __func__, __LINE__);
+        printf("[%s,%d]error, malloc failed\n", __func__, __LINE__);
         goto err;
     }
 
@@ -62,7 +62,7 @@ void *mem_pool_alloc(memPool *pool)
     assert(pool != NULL);
     if(pool->shut_down)//池已经被关闭
     {
-        logError("[%s,%d] Info, mem pool shutdown.\n", __FUNCTION__, __LINE__);
+        printf("[%s,%d] Info, mem pool shutdown.\n", __FUNCTION__, __LINE__);
         return NULL;
     }
 
@@ -97,7 +97,7 @@ void mem_pool_free(memPool *pool, void *pblock)
     assert(pblock != NULL);
     if(pool->shut_down)//池已经被关闭
     {
-        logError("[%s,%d] Info, mem pool shutdown.\n", __FUNCTION__, __LINE__);
+        printf("[%s,%d] Info, mem pool shutdown.\n", __FUNCTION__, __LINE__);
         return NULL;
     }
 
